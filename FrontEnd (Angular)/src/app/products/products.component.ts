@@ -5,6 +5,8 @@ import { DialogComponent } from '../dialog/dialog.component';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { Router } from '@angular/router';
+import {NgToastService} from 'ng-angular-popup';
 
 
 export interface ProductList {
@@ -31,7 +33,8 @@ export class ProductsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
-  constructor(public dialog: MatDialog, private apiService: ApiService) {
+  constructor(public dialog: MatDialog, private apiService: ApiService,
+     private router: Router, private toast: NgToastService) {
     
   }
 
@@ -47,6 +50,9 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+  about(){
+    this.router.navigate(['about']);
+  }
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent,{
       width: '30%'
@@ -64,7 +70,8 @@ export class ProductsComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     },
-    error => alert("Error While Fetching Data"));
+  //  error => alert("Error While Fetching Data"));
+  error => this.toast.error({detail:"Error!",summary:"Error While Fetching Data!!",duration:5000}));
   }
 
   editProduct(row:any){
@@ -80,9 +87,16 @@ export class ProductsComponent implements OnInit {
 
   deleteProduct(id:number){
     this.apiService.deleteProduct(id).subscribe(resp =>{
-      alert("Product Deleted Successfully");
+     // alert("Product Deleted Successfully!!!");
+     this.toast.success({detail:"Deleted!",summary:"Product Deleted Successfully!!!",duration:3000});
       this.getAllProducts();
     },
     error => alert("Error While Deleting the Product"));
+  }
+
+  logout(){
+    this.toast.success({detail:'Logged out!',summary:"You have Successfully Logged out!!!",duration:3000})
+    this.router.navigate(['login']);
+    localStorage.clear();//to entirely clear local storage
   }
 }

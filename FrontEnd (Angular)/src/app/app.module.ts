@@ -24,6 +24,8 @@ import { LoginComponent } from './login/login.component';
 import {MatCardModule} from '@angular/material/card';
 import { SignupComponent } from './signup/signup.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AboutComponent } from './about/about.component';
+import {NgToastModule} from "ng-angular-popup"
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     DialogComponent,
     ProductsComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatPaginatorModule,
     MatSortModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    NgToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

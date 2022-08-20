@@ -5,8 +5,9 @@
     </button>
     <span>EasyBy</span>
     <span class="example-spacer"></span>
-    <button mat-raised-button color="green" (click)="openDialog()">Add Product</button>
-    <button routerLink="/login" mat-raised-button color="warn" style="margin: 5px;">Logout</button>
+    <button mat-raised-button color="accent" (click)="about()">About Us</button>
+    <button mat-raised-button color="" (click)="openDialog()" style="margin: 5px;">Add Product</button>
+    <button (click)="logout()" mat-raised-button color="warn" style="margin: 5px;">Logout</button>
 </mat-toolbar>
     <router-outlet></router-outlet>
     </div>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms'
 import { Router } from '@angular/router';
+import {NgToastService} from 'ng-angular-popup';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +17,7 @@ export class SignupComponent implements OnInit {
   signupForm !: FormGroup;
 
   constructor(private elementRef: ElementRef, private formBuilder:FormBuilder,
-     private httpClient: HttpClient, private router: Router) { }
+     private httpClient: HttpClient, private router: Router, private toast:NgToastService) { }
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
@@ -31,7 +32,8 @@ export class SignupComponent implements OnInit {
   signup(){
     this.httpClient.post<any>("http://localhost:8080/api/users/",this.signupForm.value)
     .subscribe(res => {
-      alert("Signup is Successfull");
+     // alert("Signup is Successfull");
+     this.toast.success({detail:"Successs!",summary:"Signup is Successfull!!!",duration:5000});
       this.signupForm.reset();
       this.router.navigate(['login']);
     })
